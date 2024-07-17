@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .box {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+  }
+</style>
+<body>
+  <div class="box">
+    <button class="btn">按钮</button></button>
+  </div>
+  <script>
+    var box = document.querySelector('.box') 
+    var btn = document.querySelector('.btn')
+    // btn.onclick = function(e) {
+    //   console.log('btn')
+    // }
+    btn.addEventListener('click', function(e) {
+      console.log('window')
+    },true)
+    box.addEventListener('click', function(e) {
+      console.log('asd')
+    },true)
+    box.addEventListener('click', function(e) {
+      console.log('nnnn')
+    },false)
+  </script>
+</body>
+</html>
