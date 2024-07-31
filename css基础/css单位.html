@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>css单位</title>
+</head>
+<style>
+  /* px单位是绝对单位，等于一像素的宽度，px具有一定的相对性，由于每个屏幕的分辨率不同，可能导致像素颗粒大小不同 */
+  /* em单位是相对于字体大小的单位 ，如果自身无字体大小，则在其2父元素上寻找*/
+  /* rem单位是相对根元素的字体大小的单位 ，通常做法是给html设置一个字体大小，其他元素为re m*/
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  html{
+    font-size: 12px;
+  }
+  div {
+    font-size: 20px;
+    /* 宽等于20px*30 */
+    width: 30em;
+    /* 高等于20px*20 */
+    height: 20em;
+    border:1px solid red;
+    box-sizing: border-box;
+  }
+  p{
+    font-size: 0.5em;
+    border:1px solid skyblue;
+    /* 宽等于10px*20 */
+    width: 20em;
+    /* 高等于10px*10 */
+    height: 10em;
+  }
+  .box{
+    /* 宽等于12px*20 */
+    width: 20rem;
+    /* 高等于12px*10 */
+    height: 10rem;
+    border:1px solid rgb(103, 225, 134);
+  }
+</style>
+<body>
+   <div>
+    我是div元素 
+      <p>
+        我是p元素
+      </p>
+   </div>
+   <div class="box"></div>
+</body>
+</html>

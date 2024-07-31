@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>执行上下文</title></title>
+</head>
+<body>
+  <script>
+    //执行至'console.log('hello')'时，创建一个全局上下文 global,此时栈内仅有一个global上下文
+    console.log('hello')
+    function foo(){
+      function bar(){
+        return 'I am bar'
+      }
+    // 执行至'return bar()'时,创建一个函数局部上下文 bar,此时栈内有global、foo与bar上下文
+      return bar()
+    }
+    // 执行至'foo()'时,创建一个函数局部上下文 foo,此时栈内有global与foo上下文
+    foo()
+    // 执行至' console.log('world')'时,此时栈内仅有一个global上下文
+    console.log('world')
+  </script>
+</body>
+</html>

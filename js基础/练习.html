@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>练习</title>
+</head>
+<body>
+  <script>
+    //   function Person(name,age){
+    //     this.name = name
+    //     this.age = age
+    //     this.sayHi=function(){
+    //       console.log('Hi!')
+    //     }
+    //   }
+    //   var xiaoming = new Person('小明',22) 
+    //   console.log(xiaoming)
+    // var obj = {}
+    // function createObj(name,age){
+    //   var obj = new Object()
+    //   obj.name = name 
+    //   obj.age = age
+    //   return obj
+    // }
+    // var obj1 = createObj('孙悟空',18)
+    // console.log(obj1,obj)
+    // class createObj{
+    //   constructor(name,age){
+    //     this.name = name
+    //     this.age = age
+    //   }
+    //   sayHi(){
+    //     console.log('hi')
+    //   }
+    //   sayYes = function(){
+    //     console.log(yes)
+    //   }
+    // }
+    // var obj = new createObj('沙僧',12)
+    // console.log(obj)
+      // function GetTimes(name){
+      //   this.name = name
+      //   GetTimes.prototype.times+=1
+      //   console.log( this.times)
+      // }
+      // GetTimes.prototype.times=0
+      // var one = new GetTimes('张三')
+      // var two = new GetTimes('张三')
+      // var three = new GetTimes('王五')
+      // console.dir(GetTimes)
+      class GetTimes{
+        constructor(name){
+          this.name = name 
+          GetTimes.Times++
+        }
+        // 静态属性和方法不能通过类的实例来访问，只能通过类本身来访问。
+        static Times = 0
+      }
+      var one = new GetTimes('张三')
+      var two = new GetTimes('张三')
+      var three = new GetTimes('王五')
+      console.log(three)
+      console.dir(GetTimes)
+    </script>
+</body>
+</html>
