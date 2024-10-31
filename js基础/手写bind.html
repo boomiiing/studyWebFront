@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+Function.prototype.myBind = function(obj,...args){
+  if(obj==undefined||obj==null){
+    obj = window
+  }
+ obj['fn'] = this
+ console.log(obj)
+ return function(...args2){
+  obj.fn(...args,...args2)
+ } 
+}
+var cat = '狸花猫'
+function animal(name){
+  console.log(this.cat)
+  console.log(name)
+}
+animal('她的')
+var catobj = {cat:'奶牛猫'}
+var newCat = animal.myBind(catobj,'我的')
+newCat()
+</script>
+</html>
