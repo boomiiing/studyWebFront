@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  //关键点：由于在.mycall时，mycall中的this指向调用.myCall的函数对象
+// 因此在手写call方法时，只需在传入的目标this函数对象上加入当前需要被改变this的函数，
+// 这样再调用目标this上的对应函数，即改变了当前函数的this
+
+    Function.prototype.myCall = function(obj,...args){
+      if(obj===null||obj===undefined){
+        obj = window
+      }
+      obj['fn'] = this
+      const result = obj.fn(...args)
+      delete  obj.fn
+      return result
+    }
+    var name = '树先生'
+    var age = 40
+    function person(){
+      console.log(this.name,this.age)
+    }
+    person()
+    var obj = {name:'牛逼',age:33}
+    person.myCall(obj)
+</script>
+</html>

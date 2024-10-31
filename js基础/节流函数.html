@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button class="btn">点我</button>
+  <script>
+   var btn = document.querySelector('.btn')
+   console.log(btn)
+   function clickMe(info){
+    console.log('点我呢',info)
+   }
+     //基于时间戳的函数节流
+  //  function throttle(func,time){
+  //   let lastTime = 0
+  //   return function(...args){
+  //     let nowTime = new Date()
+  //     if(nowTime - lastTime >time){
+  //       func.apply(this,args)
+  //      lastTime =  nowTime
+  //     }
+  //   }
+  //  }
+  //基于定时器的函数节流
+  function throttle(func,time){
+    let timer = null
+    return function(...args){
+      if(!timer){
+        timer = setTimeout(()=>{
+          func.apply(this,args)
+          timer = null
+        },time)
+      }
+    }
+  }
+   var throttleClick = throttle(clickMe,1000)
+   throttleClick()
+   btn.addEventListener('click',throttleClick)
+  </script>
+</body>
+</html>
