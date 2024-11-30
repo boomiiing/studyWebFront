@@ -1,15 +1,21 @@
 const path = require('path');
-
+const ESLintPlugin = require('eslint-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: './src/main.js',
-    output: {
-        filename: 'main.js',
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'js/main.js',
-        clean: true
-    },
     mode: 'development',
-    plugins: [],
+    output: {
+        //开发环境下，打包后的文件存在内存中，此处的路径用于寻找打包后的文件
+        filename: 'js/main.js'
+    },
+    plugins: [
+        new ESLintPlugin({
+            context: path.resolve(__dirname, '../src')
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, '../public/index.html')
+        })
+    ],
     module: {
         rules: [{
                 test: /\.css$/i,
@@ -45,7 +51,17 @@ module.exports = {
                 generator: {
                     filename: 'static/media/[hash:10][ext][query]'
                 }
+            },
+            {
+                test: /\.js$/i,
+                exclude: /node_modules/,
+                loader: 'babel-loader'
             }
         ]
+    },
+    devServer: {
+        host: 'localhost',
+        port: 3000,
+        open: true
     }
 }
