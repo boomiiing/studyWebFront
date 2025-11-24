@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <a href="#" onclick="goTo('/')">首页</a>
+        <a href="#" onclick="goTo('/about')">关于</a>
+        <a href="#" onclick="goTo('/contact')">联系</a>
+    </nav>
+    <div id="content"></div>
+</body>
+<script>
+    class Router {
+    constructor() {
+        this.routes = new Map();
+        this.currentPath = '';
+    }
+    
+    // 添加路由
+    addRoute(path, callback) {
+        this.routes.set(path, callback);
+    }
+    
+    // 路由跳转
+    navigate(path) {
+        this.currentPath = path;
+        const callback = this.routes.get(path);
+        if (callback) {
+            callback();
+        } else {
+            console.log('404: 页面未找到');
+        }
+    }
+    
+    // 初始化路由
+    init() {
+        // 监听 URL 变化
+        window.addEventListener('popstate', () => {
+            this.navigate(window.location.pathname);
+        });
+        
+        // 初始加载
+        this.navigate(window.location.pathname);
+    }
+}
+// 创建路由实例
+const router = new Router();
+
+// 添加路由
+router.addRoute('/', () => {
+    document.getElementById('content').innerHTML = '<h1>首页</h1>';
+});
+
+router.addRoute('/about', () => {
+    document.getElementById('content').innerHTML = '<h1>关于页面</h1>';
+});
+
+router.addRoute('/contact', () => {
+    document.getElementById('content').innerHTML = '<h1>联系页面</h1>';
+});
+
+// 初始化路由
+router.init();
+
+// 页面跳转
+function goTo(path) {
+    if (event) {
+        event.preventDefault(); // 阻止默认跳转行为
+    }
+    try {
+        // 尝试使用 pushState
+        history.pushState(null, '', path);
+    } catch (e) {
+        // 如果失败，则使用 hash 模式
+        window.location.hash = path;
+    }
+    router.navigate(path);
+}
+
+// 使用
+goTo('/about');
+</script>
+</html>

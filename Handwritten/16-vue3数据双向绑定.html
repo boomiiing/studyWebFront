@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="nameOne"></h1>
+    <input type="text" id="inputName">
+</body>
+<script>
+    function reactive(obj) {
+        return new Proxy(obj, {
+            get(target, property) {
+                console.log('有人读了' + property);
+                return target[property]
+            },
+            set(target, property, newValue) {
+                console.log(`设置 ${property} = ${newValue}`);
+                target[property] = newValue;
+                upadate()
+            }
+        })
+    }
+    const modelObj = {
+        name:"li_h"
+    }
+    const proxyObj = reactive(modelObj);
+    let nameOne = document.getElementById('nameOne')
+    upadate()
+    function upadate(){
+        nameOne.innerText = proxyObj.name
+    }
+    let inputName = document.getElementById('inputName')
+    inputName.addEventListener('input',(e)=>{
+        proxyObj.name = e.target.value
+    })
+</script>
+
+</html>

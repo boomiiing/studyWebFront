@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="nameOne"></h1>
+    <input type="text" id="inputName" />
+</body>
+<script>
+function deserve(obj){
+    Object.keys(obj).forEach(ele=>{
+        let value = obj[ele]
+        Object.defineProperty(obj,ele,{
+            get(){
+                console.log('有人读了'+value);
+                return value
+            },
+            set(newValue){
+                if(value != newValue){
+                    console.log('有人写了'+newValue);
+                    value = newValue
+                    update()
+                }
+            }
+        })
+    })
+}
+
+const modelObj = {
+    name:'li_h'
+}
+deserve(modelObj)
+update()
+function update(){
+    let nameOne = document.getElementById('nameOne')
+nameOne.innerText = modelObj.name
+}
+let inputName = document.getElementById('inputName')
+inputName.addEventListener('input',(e)=>{
+    console.log(e);
+    modelObj.name = e.target.value
+})
+
+</script>
+
+</html>
