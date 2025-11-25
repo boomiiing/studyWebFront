@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .light {
+            display: flex;
+            width: auto;
+            background-color: #000;
+        }
+
+        .red,
+        .green,
+        .yellow {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="light">
+        <div class="item red"></div>
+        <div class="item green"></div>
+        <div class="item yellow"></div>
+    </div>
+</body>
+<script>
+    let count = 0
+    let lightArr = ['yellow', 'red', 'green']
+    let timerArr = [3, 10, 10]
+    function trfficLight() {
+        setTimeout(() => {
+            count++
+            console.log(count);
+            console.log(lightArr[count % 3] + "");
+            let allLight = document.getElementsByClassName('item')
+            for (let i = 0; i < allLight.length; i++) {
+                allLight[i].style.background = "#fff";
+            }
+
+            let currentLight = document.getElementsByClassName(lightArr[count % 3] + "")
+            console.log(currentLight);
+            currentLight[0].style.background = lightArr[count % 3] + ""
+            trfficLight()
+
+        }, timerArr[count % 3] * 1000)
+    }
+    trfficLight()
+</script>
+
+</html>
